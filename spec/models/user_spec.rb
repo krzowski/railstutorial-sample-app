@@ -62,14 +62,16 @@ describe User do
     it { should_not be_valid }
   end
 
-#  describe "when email is written uppercase" do
-#    before do 
-#      @user_with_uppercase_email = User.new(name: "HO", email: "HYDROPOWER@AHAHA.COM")
-#      @user_with_uppercase_email.save
-#    end 
-#
-#    it { should  }
-#  end
+  describe "when email is written with uppercase" do
+    let(:uppercase_email) { "HYDROPOWER@AHAHA.COM" }
+    
+    it "should have downcase email" do
+      @user.email = uppercase_email
+      @user.save
+      expect(@user.reload.email).to eq uppercase_email.downcase
+    end 
+  end
+
 
   describe "when password is not present" do
     before do 
